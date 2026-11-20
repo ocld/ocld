@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="44" viewBox="0 0 600 44" shape-rendering="crispEdges" role="img" aria-label="back to game">
+  <defs>
+    <clipPath id="c-trex"><rect x="0" y="0" width="44" height="47"/></clipPath>
+    <clipPath id="c-cac"><rect x="0" y="0" width="17" height="35"/></clipPath>
+    <filter id="night" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0"/>
+    </filter>
+  </defs>
+  <rect x="0.5" y="0.5" width="599" height="43" rx="8" fill="#0d1117" stroke="#30363d"/>
+  <path fill="#c9d1d9" opacity="0.22" d="M18,36h564v1h-564zM28,39h3v1h-3zM50,39h6v1h-6zM72,38h3v1h-3zM94,39h6v1h-6zM116,39h3v1h-3zM138,38h6v1h-6zM160,39h3v1h-3zM182,39h6v1h-6zM204,38h3v1h-3zM226,39h6v1h-6zM248,39h3v1h-3zM270,38h6v1h-6zM292,39h3v1h-3zM314,39h6v1h-6zM336,38h3v1h-3zM358,39h6v1h-6zM380,39h3v1h-3zM402,38h6v1h-6zM424,39h3v1h-3zM446,39h6v1h-6zM468,38h3v1h-3zM490,39h6v1h-6zM512,39h3v1h-3zM534,38h6v1h-6zM556,39h3v1h-3z"/>
+  <g filter="url(#night)">
+    <g transform="translate(70,17) scale(0.56)" clip-path="url(#c-cac)" opacity="0.48">
+      <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAABGBAMAAAByJ2Z/AAAADFBMVEX///9TU1P39/f///+TS9URAAAAAXRSTlMAQObYZgAAARZJREFUeF7t2NEJwzAQg2GtcCtoBe2/W6k5aK8qLgR6ToL9KPzzgR+NPCRRjg2ScjiQ9DKMCE4HRYQOJB2MJyXyQWPQgeSCDD8HnYHh10F6NbJk9KyMwpJ+hkEfnoSyGX1NUmAOqVjSz4zrNgwhm9FbMmEyuS7DpQw/Gf5kOGEYXMgwWBobnGHQmZKsYuyKDcZk8gdmM5uJMzKbgS7I5KENgJzxxN95PUMfAKi8gCXO6BQM4cM4ysEZwplyfxFDErAhmWniDKT3pJEpD2RDMpPEGUt6mOIQ1XFGmiXOZNLIgKUpgzH4lTgDtDIgmY0NznhSnWhk/v2ZkuONGOI2DEn0MNf7ttvMZjazmc2AJDkdJOlQ0sk8AC45t4r28J0GAAAAAElFTkSuQmCC" x="0" y="0" width="102" height="35" style="image-rendering:pixelated"/>
+    </g>
+    <g transform="translate(576,10) scale(-0.56,0.56)" clip-path="url(#c-trex)" opacity="0.82">
+      <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhAAAABeAgMAAAAPo8UvAAAADFBMVEX///9TU1P39/f///+TS9URAAAAAXRSTlMAQObYZgAAASdJREFUeF7t1qFOBEEQRdEyGP7vGQy/hsHc/0MPSe8ylU2vKEIqqQnviRZXdI7pyUQuONda901FGAG6j8aa+6mDEUboHP01sk5EHHWEjt/UY0dk/U+Ir/cdkXUEovV1GFF/HQMR/mLWEUYYYQRrf65XRhgB2595Y80lYRjCCG7AV/IZ0FdDabgDhiKMgE+tAX01ES+ajDBCADpHZw0tRdaZCCNEGhCdNSSlQTEVYUROQGeNxxoxH2EErXU+wohdQXONqyBorDsixiB2Be01JiOM2BXQX1MRUxFGpAL6aypiMsIIJCFBtSK98fFYKd6wFDEbYUQgEYh6hTSkonbDDTAdYQTrKNd9QPWGUFwAYYRYR7U+XemGfB0ajTACWEe1Pl3thtxMhBHfOCEbEnR2KZcAAAAASUVORK5CYII=" x="-88" y="0" width="264" height="47" style="image-rendering:pixelated"/>
+    </g>
+  </g>
+  <path fill="#c9d1d9" d="M229,14h8v2h-8zM229,16h2v2h-2zM237,16h2v2h-2zM229,18h2v2h-2zM237,18h2v2h-2zM229,20h8v2h-8zM229,22h2v2h-2zM237,22h2v2h-2zM229,24h2v2h-2zM237,24h2v2h-2zM229,26h8v2h-8zM244,14h6v2h-6zM242,16h2v2h-2zM250,16h2v2h-2zM242,18h2v2h-2zM250,18h2v2h-2zM242,20h10v2h-10zM242,22h2v2h-2zM250,22h2v2h-2zM242,24h2v2h-2zM250,24h2v2h-2zM242,26h2v2h-2zM250,26h2v2h-2zM257,14h8v2h-8zM255,16h2v2h-2zM255,18h2v2h-2zM255,20h2v2h-2zM255,22h2v2h-2zM255,24h2v2h-2zM257,26h8v2h-8zM268,14h2v2h-2zM276,14h2v2h-2zM268,16h2v2h-2zM274,16h2v2h-2zM268,18h2v2h-2zM272,18h2v2h-2zM268,20h4v2h-4zM268,22h2v2h-2zM272,22h2v2h-2zM268,24h2v2h-2zM274,24h2v2h-2zM268,26h2v2h-2zM276,26h2v2h-2zM289,14h10v2h-10zM293,16h2v2h-2zM293,18h2v2h-2zM293,20h2v2h-2zM293,22h2v2h-2zM293,24h2v2h-2zM293,26h2v2h-2zM304,14h6v2h-6zM302,16h2v2h-2zM310,16h2v2h-2zM302,18h2v2h-2zM310,18h2v2h-2zM302,20h2v2h-2zM310,20h2v2h-2zM302,22h2v2h-2zM310,22h2v2h-2zM302,24h2v2h-2zM310,24h2v2h-2zM304,26h6v2h-6zM325,14h8v2h-8zM323,16h2v2h-2zM323,18h2v2h-2zM323,20h2v2h-2zM327,20h6v2h-6zM323,22h2v2h-2zM331,22h2v2h-2zM323,24h2v2h-2zM331,24h2v2h-2zM325,26h8v2h-8zM338,14h6v2h-6zM336,16h2v2h-2zM344,16h2v2h-2zM336,18h2v2h-2zM344,18h2v2h-2zM336,20h10v2h-10zM336,22h2v2h-2zM344,22h2v2h-2zM336,24h2v2h-2zM344,24h2v2h-2zM336,26h2v2h-2zM344,26h2v2h-2zM349,14h2v2h-2zM357,14h2v2h-2zM349,16h4v2h-4zM355,16h4v2h-4zM349,18h2v2h-2zM353,18h2v2h-2zM357,18h2v2h-2zM349,20h2v2h-2zM357,20h2v2h-2zM349,22h2v2h-2zM357,22h2v2h-2zM349,24h2v2h-2zM357,24h2v2h-2zM349,26h2v2h-2zM357,26h2v2h-2zM362,14h10v2h-10zM362,16h2v2h-2zM362,18h2v2h-2zM362,20h8v2h-8zM362,22h2v2h-2zM362,24h2v2h-2zM362,26h10v2h-10z"/>
+  <path fill="#c9d1d9" opacity="0.82" d="M26,20h10v2h-10zM28,14h2v2h-2zM26,16h2v2h-2zM24,18h2v2h-2zM22,20h2v2h-2zM24,22h2v2h-2zM26,24h2v2h-2zM28,26h2v2h-2z"/>
+</svg>

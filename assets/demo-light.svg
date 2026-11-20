@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="248" viewBox="0 0 600 248" shape-rendering="crispEdges" role="img" aria-label="chrome dino gameplay demo">
+  <defs>
+    <clipPath id="card-clip"><rect x="1" y="1" width="598" height="246" rx="7"/></clipPath>
+    <clipPath id="stage"><rect x="1" y="1" width="598" height="149"/></clipPath>
+    <clipPath id="c-trex"><rect x="0" y="0" width="44" height="47"/></clipPath>
+    <clipPath id="c-cac"><rect x="0" y="0" width="34" height="35"/></clipPath>
+    <clipPath id="c-dig"><rect x="0" y="0" width="10" height="13"/></clipPath>
+    <clipPath id="c-go"><rect x="0" y="0" width="191" height="11"/></clipPath>
+    <filter id="night" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values="-1 0 0 0 1  0 -1 0 0 1  0 0 -1 0 1  0 0 0 1 0"/>
+    </filter>
+    <image id="spr-cloud" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFwAAAAcAgMAAACR2TCnAAAABlBMVEUAAADa2to4qB92AAAAAXRSTlMAQObYZgAAAFFJREFUeF6VzTEKAFEIxNA03m+a3P8q2wqi/E35BIdeGXq3q5hnrwBs7mC5vIZzu/nnqI319vRtqHB731blwSHjx+22+Rdn94rzQq0ugKPVlz5onyJcGdu0NgAAAABJRU5ErkJggg==" width="46" height="14" style="image-rendering:pixelated"/>
+    <image id="spr-horizon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACWAAAAAYAQMAAABEalRSAAAABlBMVEX///9TU1NYzE1OAAAAAXRSTlMAQObYZgAAAOtJREFUeF7tljEKwzAMRb/J0CWgI/QKOYAh1+pUcjQfpUfw2MFEHVyDQSQmQUNM9AYNcobnh4egU+YVqhAvZSpgsfolPnSv5d0nz3vHslgUdK81RLzyvHcsi+WBNxQh4Ln8pw4Wi7skAg9mXgHMrEACXJnbHIllsbqGAtwXhnYswzFzwPWxWEPc2CexoobkHM4ZpD6s2loWiyIEEwCChIomMiMEHqgP573C9eHkc5VLWh3XsljnGVoLWVl+31bp38piTVVuihtPOAm9kcRLbrFjEvqwamtZLK5eI8sSan9rXEK0LcNFrY5oWawf59S7YSRD7eMAAAAASUVORK5CYII=" width="1200" height="12" style="image-rendering:pixelated"/>
+    <image id="spr-restart-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABAAgMAAADE0Nm5AAAACVBMVEX////39/dTU1OabbyfAAAAAXRSTlMAQObYZgAAAGNJREFUeF7d1CEOwDAMQ9GS3q/ExPcz8Sm3gYBWVRo0afvwSQl0ax1To22JntKWupfGjriSXiLViCXCmXBHCykJTxaYEeIQGcVrHYklcoX8YYpSUggzcpBTiv5JtQWorUltmS6s4ZKtz2GgjAAAAABJRU5ErkJggg==" width="36" height="32" style="image-rendering:pixelated"/>
+    <g id="spr-gameover" clip-path="url(#c-go)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX4AAAAwAQMAAAAsMYMXAAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAPdJREFUeF7tkzFqAzEQRb9RsZ11BF0jlXSlpDdYOcFeSeCLKLeYQujHwxRrtF0gUoqo+AwfPRh4DDZByKk7tkv3rNszWhLHKv7BhtObALxF3LP44vRvRoLPTa4avoS8BLA+PSNFzyqAq/wDwNZxrxKBxq5axLGRS4EkgP6A6rrhy6ZVQLoiZKpfRJ8NqCp+HbCZpAcromNNHTfoeWS7hwnA//tROIpm17lddCbFgMAylGSZANiRhL1ou2treo0/ErB5AtAwbr8e8HK28wpwP8rmpwCv23+cPZhvK8GOCUD4lMHRALiOw8O9TAAcB2C8B7zDSvPw+8A3sQJ/MSdPGzIAAAAASUVORK5CYII=" x="0" y="-13" width="191" height="24" style="image-rendering:pixelated"/></g>
+    <g id="spr-cac" clip-path="url(#c-cac)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAABGBAMAAAByJ2Z/AAAADFBMVEX///9TU1P39/f///+TS9URAAAAAXRSTlMAQObYZgAAARZJREFUeF7t2NEJwzAQg2GtcCtoBe2/W6k5aK8qLgR6ToL9KPzzgR+NPCRRjg2ScjiQ9DKMCE4HRYQOJB2MJyXyQWPQgeSCDD8HnYHh10F6NbJk9KyMwpJ+hkEfnoSyGX1NUmAOqVjSz4zrNgwhm9FbMmEyuS7DpQw/Gf5kOGEYXMgwWBobnGHQmZKsYuyKDcZk8gdmM5uJMzKbgS7I5KENgJzxxN95PUMfAKi8gCXO6BQM4cM4ysEZwplyfxFDErAhmWniDKT3pJEpD2RDMpPEGUt6mOIQ1XFGmiXOZNLIgKUpgzH4lTgDtDIgmY0NznhSnWhk/v2ZkuONGOI2DEn0MNf7ttvMZjazmc2AJDkdJOlQ0sk8AC45t4r28J0GAAAAAElFTkSuQmCC" x="-17" y="0" width="102" height="35" style="image-rendering:pixelated"/></g>
+    <g id="spr-trex-jump" clip-path="url(#c-trex)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhAAAABeAgMAAAAPo8UvAAAADFBMVEX///9TU1P39/f///+TS9URAAAAAXRSTlMAQObYZgAAASdJREFUeF7t1qFOBEEQRdEyGP7vGQy/hsHc/0MPSe8ylU2vKEIqqQnviRZXdI7pyUQuONda901FGAG6j8aa+6mDEUboHP01sk5EHHWEjt/UY0dk/U+Ir/cdkXUEovV1GFF/HQMR/mLWEUYYYQRrf65XRhgB2595Y80lYRjCCG7AV/IZ0FdDabgDhiKMgE+tAX01ES+ajDBCADpHZw0tRdaZCCNEGhCdNSSlQTEVYUROQGeNxxoxH2EErXU+wohdQXONqyBorDsixiB2Be01JiOM2BXQX1MRUxFGpAL6aypiMsIIJCFBtSK98fFYKd6wFDEbYUQgEYh6hTSkonbDDTAdYQTrKNd9QPWGUFwAYYRYR7U+XemGfB0ajTACWEe1Pl3thtxMhBHfOCEbEnR2KZcAAAAASUVORK5CYII=" x="0" y="0" width="264" height="47" style="image-rendering:pixelated"/></g>
+    <g id="spr-trex-blink" clip-path="url(#c-trex)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhAAAABeAgMAAAAPo8UvAAAADFBMVEX///9TU1P39/f///+TS9URAAAAAXRSTlMAQObYZgAAASdJREFUeF7t1qFOBEEQRdEyGP7vGQy/hsHc/0MPSe8ylU2vKEIqqQnviRZXdI7pyUQuONda901FGAG6j8aa+6mDEUboHP01sk5EHHWEjt/UY0dk/U+Ir/cdkXUEovV1GFF/HQMR/mLWEUYYYQRrf65XRhgB2595Y80lYRjCCG7AV/IZ0FdDabgDhiKMgE+tAX01ES+ajDBCADpHZw0tRdaZCCNEGhCdNSSlQTEVYUROQGeNxxoxH2EErXU+wohdQXONqyBorDsixiB2Be01JiOM2BXQX1MRUxFGpAL6aypiMsIIJCFBtSK98fFYKd6wFDEbYUQgEYh6hTSkonbDDTAdYQTrKNd9QPWGUFwAYYRYR7U+XemGfB0ajTACWEe1Pl3thtxMhBHfOCEbEnR2KZcAAAAASUVORK5CYII=" x="-44" y="0" width="264" height="47" style="image-rendering:pixelated"/></g>
+    <g id="spr-trex-a" clip-path="url(#c-trex)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhAAAABeAgMAAAAPo8UvAAAADFBMVEX///9TU1P39/f///+TS9URAAAAAXRSTlMAQObYZgAAASdJREFUeF7t1qFOBEEQRdEyGP7vGQy/hsHc/0MPSe8ylU2vKEIqqQnviRZXdI7pyUQuONda901FGAG6j8aa+6mDEUboHP01sk5EHHWEjt/UY0dk/U+Ir/cdkXUEovV1GFF/HQMR/mLWEUYYYQRrf65XRhgB2595Y80lYRjCCG7AV/IZ0FdDabgDhiKMgE+tAX01ES+ajDBCADpHZw0tRdaZCCNEGhCdNSSlQTEVYUROQGeNxxoxH2EErXU+wohdQXONqyBorDsixiB2Be01JiOM2BXQX1MRUxFGpAL6aypiMsIIJCFBtSK98fFYKd6wFDEbYUQgEYh6hTSkonbDDTAdYQTrKNd9QPWGUFwAYYRYR7U+XemGfB0ajTACWEe1Pl3thtxMhBHfOCEbEnR2KZcAAAAASUVORK5CYII=" x="-88" y="0" width="264" height="47" style="image-rendering:pixelated"/></g>
+    <g id="spr-trex-b" clip-path="url(#c-trex)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhAAAABeAgMAAAAPo8UvAAAADFBMVEX///9TU1P39/f///+TS9URAAAAAXRSTlMAQObYZgAAASdJREFUeF7t1qFOBEEQRdEyGP7vGQy/hsHc/0MPSe8ylU2vKEIqqQnviRZXdI7pyUQuONda901FGAG6j8aa+6mDEUboHP01sk5EHHWEjt/UY0dk/U+Ir/cdkXUEovV1GFF/HQMR/mLWEUYYYQRrf65XRhgB2595Y80lYRjCCG7AV/IZ0FdDabgDhiKMgE+tAX01ES+ajDBCADpHZw0tRdaZCCNEGhCdNSSlQTEVYUROQGeNxxoxH2EErXU+wohdQXONqyBorDsixiB2Be01JiOM2BXQX1MRUxFGpAL6aypiMsIIJCFBtSK98fFYKd6wFDEbYUQgEYh6hTSkonbDDTAdYQTrKNd9QPWGUFwAYYRYR7U+XemGfB0ajTACWEe1Pl3thtxMhBHfOCEbEnR2KZcAAAAASUVORK5CYII=" x="-132" y="0" width="264" height="47" style="image-rendering:pixelated"/></g>
+    <g id="spr-trex-dead" clip-path="url(#c-trex)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhAAAABeAgMAAAAPo8UvAAAADFBMVEX///9TU1P39/f///+TS9URAAAAAXRSTlMAQObYZgAAASdJREFUeF7t1qFOBEEQRdEyGP7vGQy/hsHc/0MPSe8ylU2vKEIqqQnviRZXdI7pyUQuONda901FGAG6j8aa+6mDEUboHP01sk5EHHWEjt/UY0dk/U+Ir/cdkXUEovV1GFF/HQMR/mLWEUYYYQRrf65XRhgB2595Y80lYRjCCG7AV/IZ0FdDabgDhiKMgE+tAX01ES+ajDBCADpHZw0tRdaZCCNEGhCdNSSlQTEVYUROQGeNxxoxH2EErXU+wohdQXONqyBorDsixiB2Be01JiOM2BXQX1MRUxFGpAL6aypiMsIIJCFBtSK98fFYKd6wFDEbYUQgEYh6hTSkonbDDTAdYQTrKNd9QPWGUFwAYYRYR7U+XemGfB0ajTACWEe1Pl3thtxMhBHfOCEbEnR2KZcAAAAASUVORK5CYII=" x="-220" y="0" width="264" height="47" style="image-rendering:pixelated"/></g>
+    <path id="spr-duck-a" fill="#535353" d="M2,2h2v1h-2zM2,3h2v1h-2zM39,3h16v1h-16zM2,4h6v1h-6zM16,4h17v1h-17zM39,4h16v1h-16zM2,5h6v1h-6zM16,5h17v1h-17zM37,5h20v1h-20zM2,6h39v1h-39zM43,6h14v1h-14zM2,7h39v1h-39zM43,7h14v1h-14zM4,8h53v1h-53zM4,9h53v1h-53zM6,10h51v1h-51zM6,11h51v1h-51zM8,12h49v1h-49zM8,13h49v1h-49zM10,14h37v1h-37zM10,15h37v1h-37zM12,16h23v1h-23zM39,16h14v1h-14zM12,17h23v1h-23zM39,17h14v1h-14zM14,18h21v1h-21zM14,19h12v1h-12zM31,19h2v1h-2zM13,20h2v1h-2zM19,20h6v1h-6zM31,20h2v1h-2zM13,21h2v1h-2zM19,21h6v1h-6zM31,21h4v1h-4zM13,22h4v1h-4zM19,22h4v1h-4zM31,22h4v1h-4zM13,23h4v1h-4zM19,23h4v1h-4zM19,24h2v1h-2zM19,25h2v1h-2zM19,26h4v1h-4zM19,27h4v1h-4z"/>
+    <path id="spr-duck-b" fill="#535353" d="M2,2h2v1h-2zM2,3h2v1h-2zM39,3h16v1h-16zM2,4h6v1h-6zM16,4h17v1h-17zM39,4h16v1h-16zM2,5h6v1h-6zM16,5h17v1h-17zM37,5h20v1h-20zM2,6h39v1h-39zM43,6h14v1h-14zM2,7h39v1h-39zM43,7h14v1h-14zM4,8h53v1h-53zM4,9h53v1h-53zM6,10h51v1h-51zM6,11h51v1h-51zM8,12h49v1h-49zM8,13h49v1h-49zM10,14h37v1h-37zM10,15h37v1h-37zM12,16h23v1h-23zM39,16h14v1h-14zM12,17h23v1h-23zM39,17h14v1h-14zM14,18h21v1h-21zM14,19h12v1h-12zM31,19h2v1h-2zM13,20h6v1h-6zM23,20h5v1h-5zM31,20h2v1h-2zM13,21h6v1h-6zM23,21h5v1h-5zM31,21h4v1h-4zM13,22h4v1h-4zM31,22h4v1h-4zM13,23h4v1h-4zM13,24h2v1h-2zM13,25h2v1h-2zM13,26h4v1h-4zM13,27h4v1h-4z"/>
+    <path id="spr-ptero-up" fill="#535353" d="M16,2h2v1h-2zM16,3h2v1h-2zM16,4h4v1h-4zM16,5h4v1h-4zM16,6h6v1h-6zM16,7h6v1h-6zM10,8h4v1h-4zM18,8h6v1h-6zM10,9h4v1h-4zM18,9h6v1h-6zM8,10h6v1h-6zM18,10h8v1h-8zM8,11h6v1h-6zM18,11h8v1h-8zM6,12h10v1h-10zM18,12h10v1h-10zM6,13h10v1h-10zM18,13h10v1h-10zM4,14h12v1h-12zM18,14h12v1h-12zM4,15h12v1h-12zM18,15h12v1h-12zM2,16h28v1h-28zM2,17h28v1h-28zM14,18h18v1h-18zM14,19h18v1h-18zM16,20h28v1h-28zM16,21h28v1h-28zM18,22h20v1h-20zM18,23h20v1h-20zM20,24h22v1h-22zM20,25h22v1h-22zM22,26h14v1h-14zM22,27h14v1h-14z"/>
+    <path id="spr-ptero-down" fill="#535353" d="M10,8h4v1h-4zM10,9h4v1h-4zM8,10h6v1h-6zM8,11h6v1h-6zM6,12h10v1h-10zM6,13h10v1h-10zM4,14h12v1h-12zM4,15h12v1h-12zM2,16h28v1h-28zM2,17h28v1h-28zM14,18h18v1h-18zM14,19h18v1h-18zM16,20h28v1h-28zM16,21h28v1h-28zM18,22h20v1h-20zM18,23h20v1h-20zM18,24h24v1h-24zM18,25h24v1h-24zM18,26h18v1h-18zM18,27h18v1h-18zM18,28h8v1h-8zM18,29h8v1h-8zM18,30h6v1h-6zM18,31h6v1h-6zM18,32h4v1h-4zM18,33h4v1h-4zM18,34h4v1h-4zM18,35h4v1h-4zM18,36h2v1h-2zM18,37h2v1h-2z"/>
+    <g id="dig-0" clip-path="url(#c-dig)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX4AAAAwAQMAAAAsMYMXAAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAPdJREFUeF7tkzFqAzEQRb9RsZ11BF0jlXSlpDdYOcFeSeCLKLeYQujHwxRrtF0gUoqo+AwfPRh4DDZByKk7tkv3rNszWhLHKv7BhtObALxF3LP44vRvRoLPTa4avoS8BLA+PSNFzyqAq/wDwNZxrxKBxq5axLGRS4EkgP6A6rrhy6ZVQLoiZKpfRJ8NqCp+HbCZpAcromNNHTfoeWS7hwnA//tROIpm17lddCbFgMAylGSZANiRhL1ou2treo0/ErB5AtAwbr8e8HK28wpwP8rmpwCv23+cPZhvK8GOCUD4lMHRALiOw8O9TAAcB2C8B7zDSvPw+8A3sQJ/MSdPGzIAAAAASUVORK5CYII=" x="0" y="0" width="191" height="24" style="image-rendering:pixelated"/></g>
+    <g id="dig-1" clip-path="url(#c-dig)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX4AAAAwAQMAAAAsMYMXAAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAPdJREFUeF7tkzFqAzEQRb9RsZ11BF0jlXSlpDdYOcFeSeCLKLeYQujHwxRrtF0gUoqo+AwfPRh4DDZByKk7tkv3rNszWhLHKv7BhtObALxF3LP44vRvRoLPTa4avoS8BLA+PSNFzyqAq/wDwNZxrxKBxq5axLGRS4EkgP6A6rrhy6ZVQLoiZKpfRJ8NqCp+HbCZpAcromNNHTfoeWS7hwnA//tROIpm17lddCbFgMAylGSZANiRhL1ou2treo0/ErB5AtAwbr8e8HK28wpwP8rmpwCv23+cPZhvK8GOCUD4lMHRALiOw8O9TAAcB2C8B7zDSvPw+8A3sQJ/MSdPGzIAAAAASUVORK5CYII=" x="-10" y="0" width="191" height="24" style="image-rendering:pixelated"/></g>
+    <g id="dig-2" clip-path="url(#c-dig)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX4AAAAwAQMAAAAsMYMXAAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAPdJREFUeF7tkzFqAzEQRb9RsZ11BF0jlXSlpDdYOcFeSeCLKLeYQujHwxRrtF0gUoqo+AwfPRh4DDZByKk7tkv3rNszWhLHKv7BhtObALxF3LP44vRvRoLPTa4avoS8BLA+PSNFzyqAq/wDwNZxrxKBxq5axLGRS4EkgP6A6rrhy6ZVQLoiZKpfRJ8NqCp+HbCZpAcromNNHTfoeWS7hwnA//tROIpm17lddCbFgMAylGSZANiRhL1ou2treo0/ErB5AtAwbr8e8HK28wpwP8rmpwCv23+cPZhvK8GOCUD4lMHRALiOw8O9TAAcB2C8B7zDSvPw+8A3sQJ/MSdPGzIAAAAASUVORK5CYII=" x="-20" y="0" width="191" height="24" style="image-rendering:pixelated"/></g>
+    <g id="dig-3" clip-path="url(#c-dig)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX4AAAAwAQMAAAAsMYMXAAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAPdJREFUeF7tkzFqAzEQRb9RsZ11BF0jlXSlpDdYOcFeSeCLKLeYQujHwxRrtF0gUoqo+AwfPRh4DDZByKk7tkv3rNszWhLHKv7BhtObALxF3LP44vRvRoLPTa4avoS8BLA+PSNFzyqAq/wDwNZxrxKBxq5axLGRS4EkgP6A6rrhy6ZVQLoiZKpfRJ8NqCp+HbCZpAcromNNHTfoeWS7hwnA//tROIpm17lddCbFgMAylGSZANiRhL1ou2treo0/ErB5AtAwbr8e8HK28wpwP8rmpwCv23+cPZhvK8GOCUD4lMHRALiOw8O9TAAcB2C8B7zDSvPw+8A3sQJ/MSdPGzIAAAAASUVORK5CYII=" x="-30" y="0" width="191" height="24" style="image-rendering:pixelated"/></g>
+    <g id="dig-4" clip-path="url(#c-dig)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX4AAAAwAQMAAAAsMYMXAAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAPdJREFUeF7tkzFqAzEQRb9RsZ11BF0jlXSlpDdYOcFeSeCLKLeYQujHwxRrtF0gUoqo+AwfPRh4DDZByKk7tkv3rNszWhLHKv7BhtObALxF3LP44vRvRoLPTa4avoS8BLA+PSNFzyqAq/wDwNZxrxKBxq5axLGRS4EkgP6A6rrhy6ZVQLoiZKpfRJ8NqCp+HbCZpAcromNNHTfoeWS7hwnA//tROIpm17lddCbFgMAylGSZANiRhL1ou2treo0/ErB5AtAwbr8e8HK28wpwP8rmpwCv23+cPZhvK8GOCUD4lMHRALiOw8O9TAAcB2C8B7zDSvPw+8A3sQJ/MSdPGzIAAAAASUVORK5CYII=" x="-40" y="0" width="191" height="24" style="image-rendering:pixelated"/></g>
+    <g id="dig-5" clip-path="url(#c-dig)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX4AAAAwAQMAAAAsMYMXAAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAPdJREFUeF7tkzFqAzEQRb9RsZ11BF0jlXSlpDdYOcFeSeCLKLeYQujHwxRrtF0gUoqo+AwfPRh4DDZByKk7tkv3rNszWhLHKv7BhtObALxF3LP44vRvRoLPTa4avoS8BLA+PSNFzyqAq/wDwNZxrxKBxq5axLGRS4EkgP6A6rrhy6ZVQLoiZKpfRJ8NqCp+HbCZpAcromNNHTfoeWS7hwnA//tROIpm17lddCbFgMAylGSZANiRhL1ou2treo0/ErB5AtAwbr8e8HK28wpwP8rmpwCv23+cPZhvK8GOCUD4lMHRALiOw8O9TAAcB2C8B7zDSvPw+8A3sQJ/MSdPGzIAAAAASUVORK5CYII=" x="-50" y="0" width="191" height="24" style="image-rendering:pixelated"/></g>
+    <g id="dig-6" clip-path="url(#c-dig)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX4AAAAwAQMAAAAsMYMXAAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAPdJREFUeF7tkzFqAzEQRb9RsZ11BF0jlXSlpDdYOcFeSeCLKLeYQujHwxRrtF0gUoqo+AwfPRh4DDZByKk7tkv3rNszWhLHKv7BhtObALxF3LP44vRvRoLPTa4avoS8BLA+PSNFzyqAq/wDwNZxrxKBxq5axLGRS4EkgP6A6rrhy6ZVQLoiZKpfRJ8NqCp+HbCZpAcromNNHTfoeWS7hwnA//tROIpm17lddCbFgMAylGSZANiRhL1ou2treo0/ErB5AtAwbr8e8HK28wpwP8rmpwCv23+cPZhvK8GOCUD4lMHRALiOw8O9TAAcB2C8B7zDSvPw+8A3sQJ/MSdPGzIAAAAASUVORK5CYII=" x="-60" y="0" width="191" height="24" style="image-rendering:pixelated"/></g>
+    <g id="dig-7" clip-path="url(#c-dig)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX4AAAAwAQMAAAAsMYMXAAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAPdJREFUeF7tkzFqAzEQRb9RsZ11BF0jlXSlpDdYOcFeSeCLKLeYQujHwxRrtF0gUoqo+AwfPRh4DDZByKk7tkv3rNszWhLHKv7BhtObALxF3LP44vRvRoLPTa4avoS8BLA+PSNFzyqAq/wDwNZxrxKBxq5axLGRS4EkgP6A6rrhy6ZVQLoiZKpfRJ8NqCp+HbCZpAcromNNHTfoeWS7hwnA//tROIpm17lddCbFgMAylGSZANiRhL1ou2treo0/ErB5AtAwbr8e8HK28wpwP8rmpwCv23+cPZhvK8GOCUD4lMHRALiOw8O9TAAcB2C8B7zDSvPw+8A3sQJ/MSdPGzIAAAAASUVORK5CYII=" x="-70" y="0" width="191" height="24" style="image-rendering:pixelated"/></g>
+    <g id="dig-8" clip-path="url(#c-dig)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX4AAAAwAQMAAAAsMYMXAAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAPdJREFUeF7tkzFqAzEQRb9RsZ11BF0jlXSlpDdYOcFeSeCLKLeYQujHwxRrtF0gUoqo+AwfPRh4DDZByKk7tkv3rNszWhLHKv7BhtObALxF3LP44vRvRoLPTa4avoS8BLA+PSNFzyqAq/wDwNZxrxKBxq5axLGRS4EkgP6A6rrhy6ZVQLoiZKpfRJ8NqCp+HbCZpAcromNNHTfoeWS7hwnA//tROIpm17lddCbFgMAylGSZANiRhL1ou2treo0/ErB5AtAwbr8e8HK28wpwP8rmpwCv23+cPZhvK8GOCUD4lMHRALiOw8O9TAAcB2C8B7zDSvPw+8A3sQJ/MSdPGzIAAAAASUVORK5CYII=" x="-80" y="0" width="191" height="24" style="image-rendering:pixelated"/></g>
+    <g id="dig-9" clip-path="url(#c-dig)"><image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAX4AAAAwAQMAAAAsMYMXAAAABlBMVEUAAABTU1OoaSf/AAAAAXRSTlMAQObYZgAAAPdJREFUeF7tkzFqAzEQRb9RsZ11BF0jlXSlpDdYOcFeSeCLKLeYQujHwxRrtF0gUoqo+AwfPRh4DDZByKk7tkv3rNszWhLHKv7BhtObALxF3LP44vRvRoLPTa4avoS8BLA+PSNFzyqAq/wDwNZxrxKBxq5axLGRS4EkgP6A6rrhy6ZVQLoiZKpfRJ8NqCp+HbCZpAcromNNHTfoeWS7hwnA//tROIpm17lddCbFgMAylGSZANiRhL1ou2treo0/ErB5AtAwbr8e8HK28wpwP8rmpwCv23+cPZhvK8GOCUD4lMHRALiOw8O9TAAcB2C8B7zDSvPw+8A3sQJ/MSdPGzIAAAAASUVORK5CYII=" x="-90" y="0" width="191" height="24" style="image-rendering:pixelated"/></g>
+    <path id="k-up" fill="#535353" fill-rule="evenodd" d="M3,1 H33 V2 H34 V3 H35 V29 H34 V30 H33 V31 H3 V30 H2 V29 H1 V3 H2 V2 H3 Z M17,7 H19 V8 H20 V9 H21 V10 H22 V11 H23 V12 H24 V13 H25 V15 H20 V24 H16 V15 H11 V13 H12 V12 H13 V11 H14 V10 H15 V9 H16 V8 H17 Z"/>
+    <path id="k-left" fill="#535353" fill-rule="evenodd" d="M3,1 H33 V2 H34 V3 H35 V29 H34 V30 H33 V31 H3 V30 H2 V29 H1 V3 H2 V2 H3 Z M27,14 H17 V9 H15 V10 H14 V11 H13 V12 H12 V13 H11 V14 H10 V15 H9 V17 H10 V18 H11 V19 H12 V20 H13 V21 H14 V22 H15 V23 H17 V18 H27 Z"/>
+    <path id="k-down" fill="#535353" fill-rule="evenodd" d="M3,1 H33 V2 H34 V3 H35 V29 H34 V30 H33 V31 H3 V30 H2 V29 H1 V3 H2 V2 H3 Z M16,8 H20 V17 H25 V19 H24 V20 H23 V21 H22 V22 H21 V23 H20 V24 H19 V25 H17 V24 H16 V23 H15 V22 H14 V21 H13 V20 H12 V19 H11 V17 H16 Z"/>
+    <path id="k-right" fill="#535353" fill-rule="evenodd" d="M3,1 H33 V2 H34 V3 H35 V29 H34 V30 H33 V31 H3 V30 H2 V29 H1 V3 H2 V2 H3 Z M9,14 H19 V9 H21 V10 H22 V11 H23 V12 H24 V13 H25 V14 H26 V15 H27 V17 H26 V18 H25 V19 H24 V20 H23 V21 H22 V22 H21 V23 H19 V18 H9 Z"/>
+    <path id="k-restart" fill="#535353" d="M3,1h30v1h-30zM2,2h32v1h-32zM1,3h34v1h-34zM1,4h34v1h-34zM1,5h34v1h-34zM1,6h14v1h-14zM16,6h19v1h-19zM1,7h14v1h-14zM17,7h18v1h-18zM1,8h14v1h-14zM18,8h17v1h-17zM1,9h9v1h-9zM19,9h4v1h-4zM26,9h9v1h-9zM1,10h8v1h-8zM20,10h3v1h-3zM27,10h8v1h-8zM1,11h7v1h-7zM19,11h4v1h-4zM28,11h7v1h-7zM1,12h7v1h-7zM11,12h4v1h-4zM18,12h7v1h-7zM28,12h7v1h-7zM1,13h7v1h-7zM11,13h4v1h-4zM17,13h8v1h-8zM28,13h7v1h-7zM1,14h7v1h-7zM11,14h4v1h-4zM16,14h9v1h-9zM28,14h7v1h-7zM1,15h7v1h-7zM11,15h14v1h-14zM28,15h7v1h-7zM1,16h7v1h-7zM11,16h14v1h-14zM28,16h7v1h-7zM1,17h7v1h-7zM11,17h14v1h-14zM28,17h7v1h-7zM1,18h7v1h-7zM11,18h14v1h-14zM28,18h7v1h-7zM1,19h7v1h-7zM11,19h14v1h-14zM28,19h7v1h-7zM1,20h7v1h-7zM28,20h7v1h-7zM1,21h8v1h-8zM27,21h8v1h-8zM1,22h9v1h-9zM26,22h9v1h-9zM1,23h34v1h-34zM1,24h34v1h-34zM1,25h34v1h-34zM1,26h34v1h-34zM1,27h34v1h-34zM1,28h34v1h-34zM2,29h32v1h-32zM3,30h30v1h-30z"/>
+  </defs>
+  <style>
+    /* Smooth native Chrome-Dino sprite and tactile click animations (full 60fps!) */
+    @keyframes runA { 0%, 49.9% { opacity: 1; } 50%, 100% { opacity: 0; } }
+    @keyframes runB { 0%, 49.9% { opacity: 0; } 50%, 100% { opacity: 1; } }
+    @keyframes blinkA { 0%, 84%, 100% { opacity: 1; } 85%, 94% { opacity: 0; } }
+    @keyframes blinkB { 0%, 84%, 100% { opacity: 0; } 85%, 94% { opacity: 1; } }
+    @keyframes airBob { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-2.5px); } }
+    @keyframes tapKey { 0% { transform: translateY(0px); } 16% { transform: translateY(3px); } 48% { transform: translateY(0px); } 100% { transform: translateY(0px); } }
+    @keyframes tapRing { 0% { opacity: 0.95; } 40% { opacity: 0.95; } 68% { opacity: 0; } 100% { opacity: 0; } }
+    .dino-run-a { animation: runA 0.28s steps(1) infinite; }
+    .dino-run-b { animation: runB 0.28s steps(1) infinite; }
+    .dino-idle-a { animation: blinkA 2.4s steps(1) infinite; }
+    .dino-idle-b { animation: blinkB 2.4s steps(1) infinite; }
+    .dino-air { animation: airBob 0.55s ease-in-out infinite; }
+    .ptero-a { animation: runA 0.36s steps(1) infinite; }
+    .ptero-b { animation: runB 0.36s steps(1) infinite; }
+    .tap-k { animation: tapKey 0.4s ease-out infinite; }
+    .tap-r { animation: tapRing 0.4s ease-out infinite; }
+    /* Discrete real-game click ticks (exact 6.25% slices, 48px/step) */
+    @keyframes k0{0%{opacity:1}6.25%,100%{opacity:0}}.f0{animation:k0 6.4s steps(1,end) infinite}
+    @keyframes k1{0%{opacity:0}6.25%{opacity:1}12.5%,100%{opacity:0}}.f1{animation:k1 6.4s steps(1,end) infinite}
+    @keyframes k2{0%{opacity:0}12.5%{opacity:1}18.75%,100%{opacity:0}}.f2{animation:k2 6.4s steps(1,end) infinite}
+    @keyframes k3{0%{opacity:0}18.75%{opacity:1}25%,100%{opacity:0}}.f3{animation:k3 6.4s steps(1,end) infinite}
+    @keyframes k4{0%{opacity:0}25%{opacity:1}31.25%,100%{opacity:0}}.f4{animation:k4 6.4s steps(1,end) infinite}
+    @keyframes k5{0%{opacity:0}31.25%{opacity:1}37.5%,100%{opacity:0}}.f5{animation:k5 6.4s steps(1,end) infinite}
+    @keyframes k6{0%{opacity:0}37.5%{opacity:1}43.75%,100%{opacity:0}}.f6{animation:k6 6.4s steps(1,end) infinite}
+    @keyframes k7{0%{opacity:0}43.75%{opacity:1}50%,100%{opacity:0}}.f7{animation:k7 6.4s steps(1,end) infinite}
+    @keyframes k8{0%{opacity:0}50%{opacity:1}56.25%,100%{opacity:0}}.f8{animation:k8 6.4s steps(1,end) infinite}
+    @keyframes k9{0%{opacity:0}56.25%{opacity:1}62.5%,100%{opacity:0}}.f9{animation:k9 6.4s steps(1,end) infinite}
+    @keyframes k10{0%{opacity:0}62.5%{opacity:1}68.75%,100%{opacity:0}}.f10{animation:k10 6.4s steps(1,end) infinite}
+    @keyframes k11{0%{opacity:0}68.75%{opacity:1}75%,100%{opacity:0}}.f11{animation:k11 6.4s steps(1,end) infinite}
+    @keyframes k12{0%{opacity:0}75%{opacity:1}81.25%,100%{opacity:0}}.f12{animation:k12 6.4s steps(1,end) infinite}
+    @keyframes k13{0%{opacity:0}81.25%{opacity:1}87.5%,100%{opacity:0}}.f13{animation:k13 6.4s steps(1,end) infinite}
+    @keyframes k14{0%{opacity:0}87.5%{opacity:1}93.75%,100%{opacity:0}}.f14{animation:k14 6.4s steps(1,end) infinite}
+    @keyframes k15{0%{opacity:0}93.75%,100%{opacity:1}}.f15{animation:k15 6.4s steps(1,end) infinite}
+    @keyframes modeNorm{0%{opacity:1}25%{opacity:0}37.5%{opacity:1}87.5%,100%{opacity:0}}
+    @keyframes modeCrash{0%{opacity:0}25%{opacity:1}37.5%{opacity:0}87.5%,100%{opacity:1}}
+    .m-norm{animation:modeNorm 51.2s steps(1,end) infinite}
+    .m-crash{animation:modeCrash 51.2s steps(1,end) infinite}
+  </style>
+  <rect x="0.5" y="0.5" width="599" height="247" rx="8" fill="#f7f7f7" stroke="#e5e5e5"/>
+  <g clip-path="url(#card-clip)">
+    <rect x="0" y="150" width="600" height="98" fill="#efefef"/>
+    <rect x="0" y="150" width="600" height="1" fill="#e5e5e5"/>
+    <g class="m-norm">
+    <g class="f0">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="70" y="30" opacity="0.82"/><use href="#spr-cloud" x="262" y="30" opacity="0.82"/><use href="#spr-cloud" x="454" y="30" opacity="0.82"/><use href="#spr-cloud" x="646" y="30" opacity="0.82"/><use href="#spr-cloud" x="166" y="52" opacity="0.65"/><use href="#spr-cloud" x="358" y="52" opacity="0.65"/><use href="#spr-cloud" x="550" y="52" opacity="0.65"/><use href="#spr-cloud" x="742" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="0" y="127"/>
+        <use href="#spr-cac" x="200" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="542" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="542" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-trex-a" x="50" y="93"/></g><g class="dino-run-b"><use href="#spr-trex-b" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-1" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f1">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="58" y="30" opacity="0.82"/><use href="#spr-cloud" x="250" y="30" opacity="0.82"/><use href="#spr-cloud" x="442" y="30" opacity="0.82"/><use href="#spr-cloud" x="634" y="30" opacity="0.82"/><use href="#spr-cloud" x="154" y="52" opacity="0.65"/><use href="#spr-cloud" x="346" y="52" opacity="0.65"/><use href="#spr-cloud" x="538" y="52" opacity="0.65"/><use href="#spr-cloud" x="730" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-48" y="127"/>
+        <use href="#spr-cac" x="152" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="494" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="494" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-trex-a" x="50" y="93"/></g><g class="dino-run-b"><use href="#spr-trex-b" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-2" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f2">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="46" y="30" opacity="0.82"/><use href="#spr-cloud" x="238" y="30" opacity="0.82"/><use href="#spr-cloud" x="430" y="30" opacity="0.82"/><use href="#spr-cloud" x="622" y="30" opacity="0.82"/><use href="#spr-cloud" x="142" y="52" opacity="0.65"/><use href="#spr-cloud" x="334" y="52" opacity="0.65"/><use href="#spr-cloud" x="526" y="52" opacity="0.65"/><use href="#spr-cloud" x="718" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-96" y="127"/>
+        <use href="#spr-cac" x="104" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="446" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="446" y="70"/></g>
+        <g transform="translate(50,40)"><g class="dino-air"><use href="#spr-trex-jump"/></g></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-3" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="250" y="163" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <g transform="translate(253,164)"><g class="tap-k"><use href="#k-up"/></g></g>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <use href="#k-right" x="293" y="200"/>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f3">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="34" y="30" opacity="0.82"/><use href="#spr-cloud" x="226" y="30" opacity="0.82"/><use href="#spr-cloud" x="418" y="30" opacity="0.82"/><use href="#spr-cloud" x="610" y="30" opacity="0.82"/><use href="#spr-cloud" x="130" y="52" opacity="0.65"/><use href="#spr-cloud" x="322" y="52" opacity="0.65"/><use href="#spr-cloud" x="514" y="52" opacity="0.65"/><use href="#spr-cloud" x="706" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-144" y="127"/>
+        <use href="#spr-cac" x="56" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="398" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="398" y="70"/></g>
+        <g transform="translate(50,24)"><g class="dino-air"><use href="#spr-trex-jump"/></g></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-4" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f4">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="22" y="30" opacity="0.82"/><use href="#spr-cloud" x="214" y="30" opacity="0.82"/><use href="#spr-cloud" x="406" y="30" opacity="0.82"/><use href="#spr-cloud" x="598" y="30" opacity="0.82"/><use href="#spr-cloud" x="118" y="52" opacity="0.65"/><use href="#spr-cloud" x="310" y="52" opacity="0.65"/><use href="#spr-cloud" x="502" y="52" opacity="0.65"/><use href="#spr-cloud" x="694" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-192" y="127"/>
+        <use href="#spr-cac" x="8" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="350" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="350" y="70"/></g>
+        <g transform="translate(50,50)"><g class="dino-air"><use href="#spr-trex-jump"/></g></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-5" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f5">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="10" y="30" opacity="0.82"/><use href="#spr-cloud" x="202" y="30" opacity="0.82"/><use href="#spr-cloud" x="394" y="30" opacity="0.82"/><use href="#spr-cloud" x="586" y="30" opacity="0.82"/><use href="#spr-cloud" x="106" y="52" opacity="0.65"/><use href="#spr-cloud" x="298" y="52" opacity="0.65"/><use href="#spr-cloud" x="490" y="52" opacity="0.65"/><use href="#spr-cloud" x="682" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-240" y="127"/>
+        <use href="#spr-cac" x="-40" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="302" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="302" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-trex-a" x="50" y="93"/></g><g class="dino-run-b"><use href="#spr-trex-b" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-6" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f6">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="-2" y="30" opacity="0.82"/><use href="#spr-cloud" x="190" y="30" opacity="0.82"/><use href="#spr-cloud" x="382" y="30" opacity="0.82"/><use href="#spr-cloud" x="574" y="30" opacity="0.82"/><use href="#spr-cloud" x="94" y="52" opacity="0.65"/><use href="#spr-cloud" x="286" y="52" opacity="0.65"/><use href="#spr-cloud" x="478" y="52" opacity="0.65"/><use href="#spr-cloud" x="670" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-288" y="127"/>
+        <use href="#spr-cac" x="-88" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="254" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="254" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-trex-a" x="50" y="93"/></g><g class="dino-run-b"><use href="#spr-trex-b" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-7" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f7">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="-14" y="30" opacity="0.82"/><use href="#spr-cloud" x="178" y="30" opacity="0.82"/><use href="#spr-cloud" x="370" y="30" opacity="0.82"/><use href="#spr-cloud" x="562" y="30" opacity="0.82"/><use href="#spr-cloud" x="82" y="52" opacity="0.65"/><use href="#spr-cloud" x="274" y="52" opacity="0.65"/><use href="#spr-cloud" x="466" y="52" opacity="0.65"/><use href="#spr-cloud" x="658" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-336" y="127"/>
+        <use href="#spr-cac" x="632" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="206" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="206" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-trex-a" x="50" y="93"/></g><g class="dino-run-b"><use href="#spr-trex-b" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-8" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f8">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="-26" y="30" opacity="0.82"/><use href="#spr-cloud" x="166" y="30" opacity="0.82"/><use href="#spr-cloud" x="358" y="30" opacity="0.82"/><use href="#spr-cloud" x="550" y="30" opacity="0.82"/><use href="#spr-cloud" x="70" y="52" opacity="0.65"/><use href="#spr-cloud" x="262" y="52" opacity="0.65"/><use href="#spr-cloud" x="454" y="52" opacity="0.65"/><use href="#spr-cloud" x="646" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-384" y="127"/>
+        <use href="#spr-cac" x="584" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="158" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="158" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-trex-a" x="50" y="93"/></g><g class="dino-run-b"><use href="#spr-trex-b" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-9" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f9">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="-38" y="30" opacity="0.82"/><use href="#spr-cloud" x="154" y="30" opacity="0.82"/><use href="#spr-cloud" x="346" y="30" opacity="0.82"/><use href="#spr-cloud" x="538" y="30" opacity="0.82"/><use href="#spr-cloud" x="58" y="52" opacity="0.65"/><use href="#spr-cloud" x="250" y="52" opacity="0.65"/><use href="#spr-cloud" x="442" y="52" opacity="0.65"/><use href="#spr-cloud" x="634" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-432" y="127"/>
+        <use href="#spr-cac" x="536" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="110" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="110" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-duck-a" x="50" y="112"/></g><g class="dino-run-b"><use href="#spr-duck-b" x="50" y="112"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-1" x="556" y="10"/><use href="#dig-0" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="250" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <g transform="translate(253,200)"><g class="tap-k"><use href="#k-down"/></g></g>
+      <use href="#k-right" x="293" y="200"/>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f10">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="-50" y="30" opacity="0.82"/><use href="#spr-cloud" x="142" y="30" opacity="0.82"/><use href="#spr-cloud" x="334" y="30" opacity="0.82"/><use href="#spr-cloud" x="526" y="30" opacity="0.82"/><use href="#spr-cloud" x="46" y="52" opacity="0.65"/><use href="#spr-cloud" x="238" y="52" opacity="0.65"/><use href="#spr-cloud" x="430" y="52" opacity="0.65"/><use href="#spr-cloud" x="622" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-480" y="127"/>
+        <use href="#spr-cac" x="488" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="62" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="62" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-duck-a" x="50" y="112"/></g><g class="dino-run-b"><use href="#spr-duck-b" x="50" y="112"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-1" x="556" y="10"/><use href="#dig-1" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="250" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <g transform="translate(253,200)"><g class="tap-k"><use href="#k-down"/></g></g>
+      <use href="#k-right" x="293" y="200"/>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f11">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="-62" y="30" opacity="0.82"/><use href="#spr-cloud" x="130" y="30" opacity="0.82"/><use href="#spr-cloud" x="322" y="30" opacity="0.82"/><use href="#spr-cloud" x="514" y="30" opacity="0.82"/><use href="#spr-cloud" x="34" y="52" opacity="0.65"/><use href="#spr-cloud" x="226" y="52" opacity="0.65"/><use href="#spr-cloud" x="418" y="52" opacity="0.65"/><use href="#spr-cloud" x="610" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-528" y="127"/>
+        <use href="#spr-cac" x="440" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="14" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="14" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-duck-a" x="50" y="112"/></g><g class="dino-run-b"><use href="#spr-duck-b" x="50" y="112"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-1" x="556" y="10"/><use href="#dig-2" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="250" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <g transform="translate(253,200)"><g class="tap-k"><use href="#k-down"/></g></g>
+      <use href="#k-right" x="293" y="200"/>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f12">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="-74" y="30" opacity="0.82"/><use href="#spr-cloud" x="118" y="30" opacity="0.82"/><use href="#spr-cloud" x="310" y="30" opacity="0.82"/><use href="#spr-cloud" x="502" y="30" opacity="0.82"/><use href="#spr-cloud" x="22" y="52" opacity="0.65"/><use href="#spr-cloud" x="214" y="52" opacity="0.65"/><use href="#spr-cloud" x="406" y="52" opacity="0.65"/><use href="#spr-cloud" x="598" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-576" y="127"/>
+        <use href="#spr-cac" x="392" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="-34" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="-34" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-trex-a" x="50" y="93"/></g><g class="dino-run-b"><use href="#spr-trex-b" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-1" x="556" y="10"/><use href="#dig-3" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f13">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="-86" y="30" opacity="0.82"/><use href="#spr-cloud" x="106" y="30" opacity="0.82"/><use href="#spr-cloud" x="298" y="30" opacity="0.82"/><use href="#spr-cloud" x="490" y="30" opacity="0.82"/><use href="#spr-cloud" x="10" y="52" opacity="0.65"/><use href="#spr-cloud" x="202" y="52" opacity="0.65"/><use href="#spr-cloud" x="394" y="52" opacity="0.65"/><use href="#spr-cloud" x="586" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-24" y="127"/>
+        <use href="#spr-cac" x="344" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="-82" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="-82" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-trex-a" x="50" y="93"/></g><g class="dino-run-b"><use href="#spr-trex-b" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-1" x="556" y="10"/><use href="#dig-4" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f14">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="-98" y="30" opacity="0.82"/><use href="#spr-cloud" x="94" y="30" opacity="0.82"/><use href="#spr-cloud" x="286" y="30" opacity="0.82"/><use href="#spr-cloud" x="478" y="30" opacity="0.82"/><use href="#spr-cloud" x="-2" y="52" opacity="0.65"/><use href="#spr-cloud" x="190" y="52" opacity="0.65"/><use href="#spr-cloud" x="382" y="52" opacity="0.65"/><use href="#spr-cloud" x="574" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-72" y="127"/>
+        <use href="#spr-cac" x="296" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="638" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="638" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-trex-a" x="50" y="93"/></g><g class="dino-run-b"><use href="#spr-trex-b" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-1" x="556" y="10"/><use href="#dig-5" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f15">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="-110" y="30" opacity="0.82"/><use href="#spr-cloud" x="82" y="30" opacity="0.82"/><use href="#spr-cloud" x="274" y="30" opacity="0.82"/><use href="#spr-cloud" x="466" y="30" opacity="0.82"/><use href="#spr-cloud" x="-14" y="52" opacity="0.65"/><use href="#spr-cloud" x="178" y="52" opacity="0.65"/><use href="#spr-cloud" x="370" y="52" opacity="0.65"/><use href="#spr-cloud" x="562" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-120" y="127"/>
+        <use href="#spr-cac" x="248" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="590" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="590" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-trex-a" x="50" y="93"/></g><g class="dino-run-b"><use href="#spr-trex-b" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-1" x="556" y="10"/><use href="#dig-6" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    </g>
+    <g class="m-crash">
+    <g class="f0">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="70" y="30" opacity="0.82"/><use href="#spr-cloud" x="262" y="30" opacity="0.82"/><use href="#spr-cloud" x="454" y="30" opacity="0.82"/><use href="#spr-cloud" x="646" y="30" opacity="0.82"/><use href="#spr-cloud" x="166" y="52" opacity="0.65"/><use href="#spr-cloud" x="358" y="52" opacity="0.65"/><use href="#spr-cloud" x="550" y="52" opacity="0.65"/><use href="#spr-cloud" x="742" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="0" y="127"/>
+        <use href="#spr-cac" x="200" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="542" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="542" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-trex-a" x="50" y="93"/></g><g class="dino-run-b"><use href="#spr-trex-b" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-1" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f1">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="58" y="30" opacity="0.82"/><use href="#spr-cloud" x="250" y="30" opacity="0.82"/><use href="#spr-cloud" x="442" y="30" opacity="0.82"/><use href="#spr-cloud" x="634" y="30" opacity="0.82"/><use href="#spr-cloud" x="154" y="52" opacity="0.65"/><use href="#spr-cloud" x="346" y="52" opacity="0.65"/><use href="#spr-cloud" x="538" y="52" opacity="0.65"/><use href="#spr-cloud" x="730" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-48" y="127"/>
+        <use href="#spr-cac" x="152" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="494" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="494" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-trex-a" x="50" y="93"/></g><g class="dino-run-b"><use href="#spr-trex-b" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-2" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f2">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="46" y="30" opacity="0.82"/><use href="#spr-cloud" x="238" y="30" opacity="0.82"/><use href="#spr-cloud" x="430" y="30" opacity="0.82"/><use href="#spr-cloud" x="622" y="30" opacity="0.82"/><use href="#spr-cloud" x="142" y="52" opacity="0.65"/><use href="#spr-cloud" x="334" y="52" opacity="0.65"/><use href="#spr-cloud" x="526" y="52" opacity="0.65"/><use href="#spr-cloud" x="718" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-96" y="127"/>
+        <use href="#spr-cac" x="104" y="105"/>
+        <g class="ptero-a"><use href="#spr-ptero-up" x="446" y="70"/></g><g class="ptero-b"><use href="#spr-ptero-down" x="446" y="70"/></g>
+        <g class="dino-run-a"><use href="#spr-trex-a" x="50" y="93"/></g><g class="dino-run-b"><use href="#spr-trex-b" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-3" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f3">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="34" y="30" opacity="0.82"/><use href="#spr-cloud" x="226" y="30" opacity="0.82"/><use href="#spr-cloud" x="418" y="30" opacity="0.82"/><use href="#spr-cloud" x="610" y="30" opacity="0.82"/><use href="#spr-cloud" x="130" y="52" opacity="0.65"/><use href="#spr-cloud" x="322" y="52" opacity="0.65"/><use href="#spr-cloud" x="514" y="52" opacity="0.65"/><use href="#spr-cloud" x="706" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-144" y="127"/>
+        <use href="#spr-cac" x="66" y="105"/>
+        <use href="#spr-ptero-down" x="398" y="70"/>
+        <use href="#spr-trex-dead" x="50" y="93"/>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-3" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+        <use href="#spr-gameover" x="205" y="42"/>
+        <use href="#spr-restart-icon" x="282" y="68"/>
+      </g>
+      <use href="#k-up" x="253" y="164" opacity="0.28"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200" opacity="0.28"/>
+      <use href="#k-right" x="293" y="200" opacity="0.28"/>
+      <use href="#k-restart" x="351" y="200"/>
+    </g>
+    <g class="f4">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="34" y="30" opacity="0.82"/><use href="#spr-cloud" x="226" y="30" opacity="0.82"/><use href="#spr-cloud" x="418" y="30" opacity="0.82"/><use href="#spr-cloud" x="610" y="30" opacity="0.82"/><use href="#spr-cloud" x="130" y="52" opacity="0.65"/><use href="#spr-cloud" x="322" y="52" opacity="0.65"/><use href="#spr-cloud" x="514" y="52" opacity="0.65"/><use href="#spr-cloud" x="706" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-144" y="127"/>
+        <use href="#spr-cac" x="66" y="105"/>
+        <use href="#spr-ptero-down" x="398" y="70"/>
+        <use href="#spr-trex-dead" x="50" y="93"/>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-3" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+        <use href="#spr-gameover" x="205" y="42"/>
+        <use href="#spr-restart-icon" x="282" y="68"/>
+      </g>
+      <use href="#k-up" x="253" y="164" opacity="0.28"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200" opacity="0.28"/>
+      <use href="#k-right" x="293" y="200" opacity="0.28"/>
+      <use href="#k-restart" x="351" y="200"/>
+    </g>
+    <g class="f5">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="34" y="30" opacity="0.82"/><use href="#spr-cloud" x="226" y="30" opacity="0.82"/><use href="#spr-cloud" x="418" y="30" opacity="0.82"/><use href="#spr-cloud" x="610" y="30" opacity="0.82"/><use href="#spr-cloud" x="130" y="52" opacity="0.65"/><use href="#spr-cloud" x="322" y="52" opacity="0.65"/><use href="#spr-cloud" x="514" y="52" opacity="0.65"/><use href="#spr-cloud" x="706" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-144" y="127"/>
+        <use href="#spr-cac" x="66" y="105"/>
+        <use href="#spr-ptero-down" x="398" y="70"/>
+        <use href="#spr-trex-dead" x="50" y="93"/>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-3" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+        <use href="#spr-gameover" x="205" y="42"/>
+        <use href="#spr-restart-icon" x="282" y="68"/>
+      </g>
+      <use href="#k-up" x="253" y="164" opacity="0.28"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200" opacity="0.28"/>
+      <use href="#k-right" x="293" y="200" opacity="0.28"/>
+      <use href="#k-restart" x="351" y="200"/>
+    </g>
+    <g class="f6">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="34" y="30" opacity="0.82"/><use href="#spr-cloud" x="226" y="30" opacity="0.82"/><use href="#spr-cloud" x="418" y="30" opacity="0.82"/><use href="#spr-cloud" x="610" y="30" opacity="0.82"/><use href="#spr-cloud" x="130" y="52" opacity="0.65"/><use href="#spr-cloud" x="322" y="52" opacity="0.65"/><use href="#spr-cloud" x="514" y="52" opacity="0.65"/><use href="#spr-cloud" x="706" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-144" y="127"/>
+        <use href="#spr-cac" x="66" y="105"/>
+        <use href="#spr-ptero-down" x="398" y="70"/>
+        <use href="#spr-trex-dead" x="50" y="93"/>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-3" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+        <use href="#spr-gameover" x="205" y="42"/>
+        <use href="#spr-restart-icon" x="282" y="68"/>
+      </g>
+      <use href="#k-up" x="253" y="164" opacity="0.28"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200" opacity="0.28"/>
+      <use href="#k-right" x="293" y="200" opacity="0.28"/>
+      <use href="#k-restart" x="351" y="200"/>
+    </g>
+    <g class="f7">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="34" y="30" opacity="0.82"/><use href="#spr-cloud" x="226" y="30" opacity="0.82"/><use href="#spr-cloud" x="418" y="30" opacity="0.82"/><use href="#spr-cloud" x="610" y="30" opacity="0.82"/><use href="#spr-cloud" x="130" y="52" opacity="0.65"/><use href="#spr-cloud" x="322" y="52" opacity="0.65"/><use href="#spr-cloud" x="514" y="52" opacity="0.65"/><use href="#spr-cloud" x="706" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-144" y="127"/>
+        <use href="#spr-cac" x="66" y="105"/>
+        <use href="#spr-ptero-down" x="398" y="70"/>
+        <use href="#spr-trex-dead" x="50" y="93"/>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-3" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+        <use href="#spr-gameover" x="205" y="42"/>
+        <use href="#spr-restart-icon" x="282" y="68"/>
+      </g>
+      <use href="#k-up" x="253" y="164" opacity="0.28"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200" opacity="0.28"/>
+      <use href="#k-right" x="293" y="200" opacity="0.28"/>
+      <use href="#k-restart" x="351" y="200"/>
+    </g>
+    <g class="f8">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="34" y="30" opacity="0.82"/><use href="#spr-cloud" x="226" y="30" opacity="0.82"/><use href="#spr-cloud" x="418" y="30" opacity="0.82"/><use href="#spr-cloud" x="610" y="30" opacity="0.82"/><use href="#spr-cloud" x="130" y="52" opacity="0.65"/><use href="#spr-cloud" x="322" y="52" opacity="0.65"/><use href="#spr-cloud" x="514" y="52" opacity="0.65"/><use href="#spr-cloud" x="706" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-144" y="127"/>
+        <use href="#spr-cac" x="66" y="105"/>
+        <use href="#spr-ptero-down" x="398" y="70"/>
+        <use href="#spr-trex-dead" x="50" y="93"/>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-3" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+        <use href="#spr-gameover" x="205" y="42"/>
+        <use href="#spr-restart-icon" x="282" y="68"/>
+      </g>
+      <rect class="tap-r" x="348" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164" opacity="0.28"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200" opacity="0.28"/>
+      <use href="#k-right" x="293" y="200" opacity="0.28"/>
+      <g transform="translate(351,200)"><g class="tap-k"><use href="#k-restart"/></g></g>
+    </g>
+    <g class="f9">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="34" y="30" opacity="0.82"/><use href="#spr-cloud" x="226" y="30" opacity="0.82"/><use href="#spr-cloud" x="418" y="30" opacity="0.82"/><use href="#spr-cloud" x="610" y="30" opacity="0.82"/><use href="#spr-cloud" x="130" y="52" opacity="0.65"/><use href="#spr-cloud" x="322" y="52" opacity="0.65"/><use href="#spr-cloud" x="514" y="52" opacity="0.65"/><use href="#spr-cloud" x="706" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="-144" y="127"/>
+        <use href="#spr-cac" x="66" y="105"/>
+        <use href="#spr-ptero-down" x="398" y="70"/>
+        <use href="#spr-trex-dead" x="50" y="93"/>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-3" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+        <use href="#spr-gameover" x="205" y="42"/>
+        <use href="#spr-restart-icon" x="282" y="68"/>
+      </g>
+      <rect class="tap-r" x="348" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164" opacity="0.28"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200" opacity="0.28"/>
+      <use href="#k-right" x="293" y="200" opacity="0.28"/>
+      <g transform="translate(351,200)"><g class="tap-k"><use href="#k-restart"/></g></g>
+    </g>
+    <g class="f10">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="70" y="30" opacity="0.82"/><use href="#spr-cloud" x="262" y="30" opacity="0.82"/><use href="#spr-cloud" x="454" y="30" opacity="0.82"/><use href="#spr-cloud" x="646" y="30" opacity="0.82"/><use href="#spr-cloud" x="166" y="52" opacity="0.65"/><use href="#spr-cloud" x="358" y="52" opacity="0.65"/><use href="#spr-cloud" x="550" y="52" opacity="0.65"/><use href="#spr-cloud" x="742" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="0" y="127"/>
+        <use href="#spr-cac" x="248" y="105"/>
+        <g class="dino-idle-a"><use href="#spr-trex-jump" x="50" y="93"/></g><g class="dino-idle-b"><use href="#spr-trex-blink" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-0" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+        <path fill="#535353" d="M218,56h8v2h-8zM216,58h2v2h-2zM216,60h2v2h-2zM216,62h2v2h-2zM216,64h2v2h-2zM216,66h2v2h-2zM218,68h8v2h-8zM229,56h2v2h-2zM229,58h2v2h-2zM229,60h2v2h-2zM229,62h2v2h-2zM229,64h2v2h-2zM229,66h2v2h-2zM229,68h10v2h-10zM242,56h10v2h-10zM246,58h2v2h-2zM246,60h2v2h-2zM246,62h2v2h-2zM246,64h2v2h-2zM246,66h2v2h-2zM242,68h10v2h-10zM257,56h8v2h-8zM255,58h2v2h-2zM255,60h2v2h-2zM255,62h2v2h-2zM255,64h2v2h-2zM255,66h2v2h-2zM257,68h8v2h-8zM268,56h2v2h-2zM276,56h2v2h-2zM268,58h2v2h-2zM274,58h2v2h-2zM268,60h2v2h-2zM272,60h2v2h-2zM268,62h4v2h-4zM268,64h2v2h-2zM272,64h2v2h-2zM268,66h2v2h-2zM274,66h2v2h-2zM268,68h2v2h-2zM276,68h2v2h-2zM289,56h10v2h-10zM293,58h2v2h-2zM293,60h2v2h-2zM293,62h2v2h-2zM293,64h2v2h-2zM293,66h2v2h-2zM293,68h2v2h-2zM304,56h6v2h-6zM302,58h2v2h-2zM310,58h2v2h-2zM302,60h2v2h-2zM310,60h2v2h-2zM302,62h2v2h-2zM310,62h2v2h-2zM302,64h2v2h-2zM310,64h2v2h-2zM302,66h2v2h-2zM310,66h2v2h-2zM304,68h6v2h-6zM325,56h8v2h-8zM323,58h2v2h-2zM323,60h2v2h-2zM325,62h6v2h-6zM331,64h2v2h-2zM331,66h2v2h-2zM323,68h8v2h-8zM336,56h10v2h-10zM340,58h2v2h-2zM340,60h2v2h-2zM340,62h2v2h-2zM340,64h2v2h-2zM340,66h2v2h-2zM340,68h2v2h-2zM351,56h6v2h-6zM349,58h2v2h-2zM357,58h2v2h-2zM349,60h2v2h-2zM357,60h2v2h-2zM349,62h10v2h-10zM349,64h2v2h-2zM357,64h2v2h-2zM349,66h2v2h-2zM357,66h2v2h-2zM349,68h2v2h-2zM357,68h2v2h-2zM362,56h8v2h-8zM362,58h2v2h-2zM370,58h2v2h-2zM362,60h2v2h-2zM370,60h2v2h-2zM362,62h8v2h-8zM362,64h2v2h-2zM366,64h2v2h-2zM362,66h2v2h-2zM368,66h2v2h-2zM362,68h2v2h-2zM370,68h2v2h-2zM375,56h10v2h-10zM379,58h2v2h-2zM379,60h2v2h-2zM379,62h2v2h-2zM379,64h2v2h-2zM379,66h2v2h-2zM379,68h2v2h-2z"/>
+      </g>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <use href="#k-right" x="293" y="200"/>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f11">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="70" y="30" opacity="0.82"/><use href="#spr-cloud" x="262" y="30" opacity="0.82"/><use href="#spr-cloud" x="454" y="30" opacity="0.82"/><use href="#spr-cloud" x="646" y="30" opacity="0.82"/><use href="#spr-cloud" x="166" y="52" opacity="0.65"/><use href="#spr-cloud" x="358" y="52" opacity="0.65"/><use href="#spr-cloud" x="550" y="52" opacity="0.65"/><use href="#spr-cloud" x="742" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="0" y="127"/>
+        <use href="#spr-cac" x="248" y="105"/>
+        <g class="dino-idle-a"><use href="#spr-trex-jump" x="50" y="93"/></g><g class="dino-idle-b"><use href="#spr-trex-blink" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-0" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+        <path fill="#535353" d="M218,56h8v2h-8zM216,58h2v2h-2zM216,60h2v2h-2zM216,62h2v2h-2zM216,64h2v2h-2zM216,66h2v2h-2zM218,68h8v2h-8zM229,56h2v2h-2zM229,58h2v2h-2zM229,60h2v2h-2zM229,62h2v2h-2zM229,64h2v2h-2zM229,66h2v2h-2zM229,68h10v2h-10zM242,56h10v2h-10zM246,58h2v2h-2zM246,60h2v2h-2zM246,62h2v2h-2zM246,64h2v2h-2zM246,66h2v2h-2zM242,68h10v2h-10zM257,56h8v2h-8zM255,58h2v2h-2zM255,60h2v2h-2zM255,62h2v2h-2zM255,64h2v2h-2zM255,66h2v2h-2zM257,68h8v2h-8zM268,56h2v2h-2zM276,56h2v2h-2zM268,58h2v2h-2zM274,58h2v2h-2zM268,60h2v2h-2zM272,60h2v2h-2zM268,62h4v2h-4zM268,64h2v2h-2zM272,64h2v2h-2zM268,66h2v2h-2zM274,66h2v2h-2zM268,68h2v2h-2zM276,68h2v2h-2zM289,56h10v2h-10zM293,58h2v2h-2zM293,60h2v2h-2zM293,62h2v2h-2zM293,64h2v2h-2zM293,66h2v2h-2zM293,68h2v2h-2zM304,56h6v2h-6zM302,58h2v2h-2zM310,58h2v2h-2zM302,60h2v2h-2zM310,60h2v2h-2zM302,62h2v2h-2zM310,62h2v2h-2zM302,64h2v2h-2zM310,64h2v2h-2zM302,66h2v2h-2zM310,66h2v2h-2zM304,68h6v2h-6zM325,56h8v2h-8zM323,58h2v2h-2zM323,60h2v2h-2zM325,62h6v2h-6zM331,64h2v2h-2zM331,66h2v2h-2zM323,68h8v2h-8zM336,56h10v2h-10zM340,58h2v2h-2zM340,60h2v2h-2zM340,62h2v2h-2zM340,64h2v2h-2zM340,66h2v2h-2zM340,68h2v2h-2zM351,56h6v2h-6zM349,58h2v2h-2zM357,58h2v2h-2zM349,60h2v2h-2zM357,60h2v2h-2zM349,62h10v2h-10zM349,64h2v2h-2zM357,64h2v2h-2zM349,66h2v2h-2zM357,66h2v2h-2zM349,68h2v2h-2zM357,68h2v2h-2zM362,56h8v2h-8zM362,58h2v2h-2zM370,58h2v2h-2zM362,60h2v2h-2zM370,60h2v2h-2zM362,62h8v2h-8zM362,64h2v2h-2zM366,64h2v2h-2zM362,66h2v2h-2zM368,66h2v2h-2zM362,68h2v2h-2zM370,68h2v2h-2zM375,56h10v2h-10zM379,58h2v2h-2zM379,60h2v2h-2zM379,62h2v2h-2zM379,64h2v2h-2zM379,66h2v2h-2zM379,68h2v2h-2z"/>
+      </g>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <use href="#k-right" x="293" y="200"/>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f12">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="70" y="30" opacity="0.82"/><use href="#spr-cloud" x="262" y="30" opacity="0.82"/><use href="#spr-cloud" x="454" y="30" opacity="0.82"/><use href="#spr-cloud" x="646" y="30" opacity="0.82"/><use href="#spr-cloud" x="166" y="52" opacity="0.65"/><use href="#spr-cloud" x="358" y="52" opacity="0.65"/><use href="#spr-cloud" x="550" y="52" opacity="0.65"/><use href="#spr-cloud" x="742" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="0" y="127"/>
+        <use href="#spr-cac" x="248" y="105"/>
+        <g class="dino-idle-a"><use href="#spr-trex-jump" x="50" y="93"/></g><g class="dino-idle-b"><use href="#spr-trex-blink" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-0" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+        <path fill="#535353" d="M218,56h8v2h-8zM216,58h2v2h-2zM216,60h2v2h-2zM216,62h2v2h-2zM216,64h2v2h-2zM216,66h2v2h-2zM218,68h8v2h-8zM229,56h2v2h-2zM229,58h2v2h-2zM229,60h2v2h-2zM229,62h2v2h-2zM229,64h2v2h-2zM229,66h2v2h-2zM229,68h10v2h-10zM242,56h10v2h-10zM246,58h2v2h-2zM246,60h2v2h-2zM246,62h2v2h-2zM246,64h2v2h-2zM246,66h2v2h-2zM242,68h10v2h-10zM257,56h8v2h-8zM255,58h2v2h-2zM255,60h2v2h-2zM255,62h2v2h-2zM255,64h2v2h-2zM255,66h2v2h-2zM257,68h8v2h-8zM268,56h2v2h-2zM276,56h2v2h-2zM268,58h2v2h-2zM274,58h2v2h-2zM268,60h2v2h-2zM272,60h2v2h-2zM268,62h4v2h-4zM268,64h2v2h-2zM272,64h2v2h-2zM268,66h2v2h-2zM274,66h2v2h-2zM268,68h2v2h-2zM276,68h2v2h-2zM289,56h10v2h-10zM293,58h2v2h-2zM293,60h2v2h-2zM293,62h2v2h-2zM293,64h2v2h-2zM293,66h2v2h-2zM293,68h2v2h-2zM304,56h6v2h-6zM302,58h2v2h-2zM310,58h2v2h-2zM302,60h2v2h-2zM310,60h2v2h-2zM302,62h2v2h-2zM310,62h2v2h-2zM302,64h2v2h-2zM310,64h2v2h-2zM302,66h2v2h-2zM310,66h2v2h-2zM304,68h6v2h-6zM325,56h8v2h-8zM323,58h2v2h-2zM323,60h2v2h-2zM325,62h6v2h-6zM331,64h2v2h-2zM331,66h2v2h-2zM323,68h8v2h-8zM336,56h10v2h-10zM340,58h2v2h-2zM340,60h2v2h-2zM340,62h2v2h-2zM340,64h2v2h-2zM340,66h2v2h-2zM340,68h2v2h-2zM351,56h6v2h-6zM349,58h2v2h-2zM357,58h2v2h-2zM349,60h2v2h-2zM357,60h2v2h-2zM349,62h10v2h-10zM349,64h2v2h-2zM357,64h2v2h-2zM349,66h2v2h-2zM357,66h2v2h-2zM349,68h2v2h-2zM357,68h2v2h-2zM362,56h8v2h-8zM362,58h2v2h-2zM370,58h2v2h-2zM362,60h2v2h-2zM370,60h2v2h-2zM362,62h8v2h-8zM362,64h2v2h-2zM366,64h2v2h-2zM362,66h2v2h-2zM368,66h2v2h-2zM362,68h2v2h-2zM370,68h2v2h-2zM375,56h10v2h-10zM379,58h2v2h-2zM379,60h2v2h-2zM379,62h2v2h-2zM379,64h2v2h-2zM379,66h2v2h-2zM379,68h2v2h-2z"/>
+      </g>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <use href="#k-right" x="293" y="200"/>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f13">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="70" y="30" opacity="0.82"/><use href="#spr-cloud" x="262" y="30" opacity="0.82"/><use href="#spr-cloud" x="454" y="30" opacity="0.82"/><use href="#spr-cloud" x="646" y="30" opacity="0.82"/><use href="#spr-cloud" x="166" y="52" opacity="0.65"/><use href="#spr-cloud" x="358" y="52" opacity="0.65"/><use href="#spr-cloud" x="550" y="52" opacity="0.65"/><use href="#spr-cloud" x="742" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="0" y="127"/>
+        <use href="#spr-cac" x="248" y="105"/>
+        <g class="dino-idle-a"><use href="#spr-trex-jump" x="50" y="93"/></g><g class="dino-idle-b"><use href="#spr-trex-blink" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-0" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+        <path fill="#535353" d="M218,56h8v2h-8zM216,58h2v2h-2zM216,60h2v2h-2zM216,62h2v2h-2zM216,64h2v2h-2zM216,66h2v2h-2zM218,68h8v2h-8zM229,56h2v2h-2zM229,58h2v2h-2zM229,60h2v2h-2zM229,62h2v2h-2zM229,64h2v2h-2zM229,66h2v2h-2zM229,68h10v2h-10zM242,56h10v2h-10zM246,58h2v2h-2zM246,60h2v2h-2zM246,62h2v2h-2zM246,64h2v2h-2zM246,66h2v2h-2zM242,68h10v2h-10zM257,56h8v2h-8zM255,58h2v2h-2zM255,60h2v2h-2zM255,62h2v2h-2zM255,64h2v2h-2zM255,66h2v2h-2zM257,68h8v2h-8zM268,56h2v2h-2zM276,56h2v2h-2zM268,58h2v2h-2zM274,58h2v2h-2zM268,60h2v2h-2zM272,60h2v2h-2zM268,62h4v2h-4zM268,64h2v2h-2zM272,64h2v2h-2zM268,66h2v2h-2zM274,66h2v2h-2zM268,68h2v2h-2zM276,68h2v2h-2zM289,56h10v2h-10zM293,58h2v2h-2zM293,60h2v2h-2zM293,62h2v2h-2zM293,64h2v2h-2zM293,66h2v2h-2zM293,68h2v2h-2zM304,56h6v2h-6zM302,58h2v2h-2zM310,58h2v2h-2zM302,60h2v2h-2zM310,60h2v2h-2zM302,62h2v2h-2zM310,62h2v2h-2zM302,64h2v2h-2zM310,64h2v2h-2zM302,66h2v2h-2zM310,66h2v2h-2zM304,68h6v2h-6zM325,56h8v2h-8zM323,58h2v2h-2zM323,60h2v2h-2zM325,62h6v2h-6zM331,64h2v2h-2zM331,66h2v2h-2zM323,68h8v2h-8zM336,56h10v2h-10zM340,58h2v2h-2zM340,60h2v2h-2zM340,62h2v2h-2zM340,64h2v2h-2zM340,66h2v2h-2zM340,68h2v2h-2zM351,56h6v2h-6zM349,58h2v2h-2zM357,58h2v2h-2zM349,60h2v2h-2zM357,60h2v2h-2zM349,62h10v2h-10zM349,64h2v2h-2zM357,64h2v2h-2zM349,66h2v2h-2zM357,66h2v2h-2zM349,68h2v2h-2zM357,68h2v2h-2zM362,56h8v2h-8zM362,58h2v2h-2zM370,58h2v2h-2zM362,60h2v2h-2zM370,60h2v2h-2zM362,62h8v2h-8zM362,64h2v2h-2zM366,64h2v2h-2zM362,66h2v2h-2zM368,66h2v2h-2zM362,68h2v2h-2zM370,68h2v2h-2zM375,56h10v2h-10zM379,58h2v2h-2zM379,60h2v2h-2zM379,62h2v2h-2zM379,64h2v2h-2zM379,66h2v2h-2zM379,68h2v2h-2z"/>
+      </g>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <use href="#k-right" x="293" y="200"/>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f14">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="70" y="30" opacity="0.82"/><use href="#spr-cloud" x="262" y="30" opacity="0.82"/><use href="#spr-cloud" x="454" y="30" opacity="0.82"/><use href="#spr-cloud" x="646" y="30" opacity="0.82"/><use href="#spr-cloud" x="166" y="52" opacity="0.65"/><use href="#spr-cloud" x="358" y="52" opacity="0.65"/><use href="#spr-cloud" x="550" y="52" opacity="0.65"/><use href="#spr-cloud" x="742" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="0" y="127"/>
+        <use href="#spr-cac" x="248" y="105"/>
+        <g class="dino-idle-a"><use href="#spr-trex-jump" x="50" y="93"/></g><g class="dino-idle-b"><use href="#spr-trex-blink" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-0" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+        <path fill="#535353" d="M218,56h8v2h-8zM216,58h2v2h-2zM216,60h2v2h-2zM216,62h2v2h-2zM216,64h2v2h-2zM216,66h2v2h-2zM218,68h8v2h-8zM229,56h2v2h-2zM229,58h2v2h-2zM229,60h2v2h-2zM229,62h2v2h-2zM229,64h2v2h-2zM229,66h2v2h-2zM229,68h10v2h-10zM242,56h10v2h-10zM246,58h2v2h-2zM246,60h2v2h-2zM246,62h2v2h-2zM246,64h2v2h-2zM246,66h2v2h-2zM242,68h10v2h-10zM257,56h8v2h-8zM255,58h2v2h-2zM255,60h2v2h-2zM255,62h2v2h-2zM255,64h2v2h-2zM255,66h2v2h-2zM257,68h8v2h-8zM268,56h2v2h-2zM276,56h2v2h-2zM268,58h2v2h-2zM274,58h2v2h-2zM268,60h2v2h-2zM272,60h2v2h-2zM268,62h4v2h-4zM268,64h2v2h-2zM272,64h2v2h-2zM268,66h2v2h-2zM274,66h2v2h-2zM268,68h2v2h-2zM276,68h2v2h-2zM289,56h10v2h-10zM293,58h2v2h-2zM293,60h2v2h-2zM293,62h2v2h-2zM293,64h2v2h-2zM293,66h2v2h-2zM293,68h2v2h-2zM304,56h6v2h-6zM302,58h2v2h-2zM310,58h2v2h-2zM302,60h2v2h-2zM310,60h2v2h-2zM302,62h2v2h-2zM310,62h2v2h-2zM302,64h2v2h-2zM310,64h2v2h-2zM302,66h2v2h-2zM310,66h2v2h-2zM304,68h6v2h-6zM325,56h8v2h-8zM323,58h2v2h-2zM323,60h2v2h-2zM325,62h6v2h-6zM331,64h2v2h-2zM331,66h2v2h-2zM323,68h8v2h-8zM336,56h10v2h-10zM340,58h2v2h-2zM340,60h2v2h-2zM340,62h2v2h-2zM340,64h2v2h-2zM340,66h2v2h-2zM340,68h2v2h-2zM351,56h6v2h-6zM349,58h2v2h-2zM357,58h2v2h-2zM349,60h2v2h-2zM357,60h2v2h-2zM349,62h10v2h-10zM349,64h2v2h-2zM357,64h2v2h-2zM349,66h2v2h-2zM357,66h2v2h-2zM349,68h2v2h-2zM357,68h2v2h-2zM362,56h8v2h-8zM362,58h2v2h-2zM370,58h2v2h-2zM362,60h2v2h-2zM370,60h2v2h-2zM362,62h8v2h-8zM362,64h2v2h-2zM366,64h2v2h-2zM362,66h2v2h-2zM368,66h2v2h-2zM362,68h2v2h-2zM370,68h2v2h-2zM375,56h10v2h-10zM379,58h2v2h-2zM379,60h2v2h-2zM379,62h2v2h-2zM379,64h2v2h-2zM379,66h2v2h-2zM379,68h2v2h-2z"/>
+      </g>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <use href="#k-right" x="293" y="200"/>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    <g class="f15">
+      <g clip-path="url(#stage)">
+        <use href="#spr-cloud" x="70" y="30" opacity="0.82"/><use href="#spr-cloud" x="262" y="30" opacity="0.82"/><use href="#spr-cloud" x="454" y="30" opacity="0.82"/><use href="#spr-cloud" x="646" y="30" opacity="0.82"/><use href="#spr-cloud" x="166" y="52" opacity="0.65"/><use href="#spr-cloud" x="358" y="52" opacity="0.65"/><use href="#spr-cloud" x="550" y="52" opacity="0.65"/><use href="#spr-cloud" x="742" y="52" opacity="0.65"/>
+        <use href="#spr-horizon" x="0" y="127"/>
+        <use href="#spr-cac" x="248" y="105"/>
+        <g class="dino-idle-a"><use href="#spr-trex-jump" x="50" y="93"/></g><g class="dino-idle-b"><use href="#spr-trex-blink" x="50" y="93"/></g>
+        <use href="#dig-0" x="534" y="10"/><use href="#dig-0" x="545" y="10"/><use href="#dig-0" x="556" y="10"/><use href="#dig-0" x="567" y="10"/><use href="#dig-0" x="578" y="10"/>
+        <path fill="#535353" d="M218,56h8v2h-8zM216,58h2v2h-2zM216,60h2v2h-2zM216,62h2v2h-2zM216,64h2v2h-2zM216,66h2v2h-2zM218,68h8v2h-8zM229,56h2v2h-2zM229,58h2v2h-2zM229,60h2v2h-2zM229,62h2v2h-2zM229,64h2v2h-2zM229,66h2v2h-2zM229,68h10v2h-10zM242,56h10v2h-10zM246,58h2v2h-2zM246,60h2v2h-2zM246,62h2v2h-2zM246,64h2v2h-2zM246,66h2v2h-2zM242,68h10v2h-10zM257,56h8v2h-8zM255,58h2v2h-2zM255,60h2v2h-2zM255,62h2v2h-2zM255,64h2v2h-2zM255,66h2v2h-2zM257,68h8v2h-8zM268,56h2v2h-2zM276,56h2v2h-2zM268,58h2v2h-2zM274,58h2v2h-2zM268,60h2v2h-2zM272,60h2v2h-2zM268,62h4v2h-4zM268,64h2v2h-2zM272,64h2v2h-2zM268,66h2v2h-2zM274,66h2v2h-2zM268,68h2v2h-2zM276,68h2v2h-2zM289,56h10v2h-10zM293,58h2v2h-2zM293,60h2v2h-2zM293,62h2v2h-2zM293,64h2v2h-2zM293,66h2v2h-2zM293,68h2v2h-2zM304,56h6v2h-6zM302,58h2v2h-2zM310,58h2v2h-2zM302,60h2v2h-2zM310,60h2v2h-2zM302,62h2v2h-2zM310,62h2v2h-2zM302,64h2v2h-2zM310,64h2v2h-2zM302,66h2v2h-2zM310,66h2v2h-2zM304,68h6v2h-6zM325,56h8v2h-8zM323,58h2v2h-2zM323,60h2v2h-2zM325,62h6v2h-6zM331,64h2v2h-2zM331,66h2v2h-2zM323,68h8v2h-8zM336,56h10v2h-10zM340,58h2v2h-2zM340,60h2v2h-2zM340,62h2v2h-2zM340,64h2v2h-2zM340,66h2v2h-2zM340,68h2v2h-2zM351,56h6v2h-6zM349,58h2v2h-2zM357,58h2v2h-2zM349,60h2v2h-2zM357,60h2v2h-2zM349,62h10v2h-10zM349,64h2v2h-2zM357,64h2v2h-2zM349,66h2v2h-2zM357,66h2v2h-2zM349,68h2v2h-2zM357,68h2v2h-2zM362,56h8v2h-8zM362,58h2v2h-2zM370,58h2v2h-2zM362,60h2v2h-2zM370,60h2v2h-2zM362,62h8v2h-8zM362,64h2v2h-2zM366,64h2v2h-2zM362,66h2v2h-2zM368,66h2v2h-2zM362,68h2v2h-2zM370,68h2v2h-2zM375,56h10v2h-10zM379,58h2v2h-2zM379,60h2v2h-2zM379,62h2v2h-2zM379,64h2v2h-2zM379,66h2v2h-2zM379,68h2v2h-2z"/>
+      </g>
+      <rect class="tap-r" x="290" y="199" width="42" height="36" rx="5" fill="none" stroke="#535353" stroke-width="2"/>
+      <use href="#k-up" x="253" y="164"/>
+      <use href="#k-left" x="213" y="200" opacity="0.28"/>
+      <use href="#k-down" x="253" y="200"/>
+      <g transform="translate(293,200)"><g class="tap-k"><use href="#k-right"/></g></g>
+      <use href="#k-restart" x="351" y="200" opacity="0.28"/>
+    </g>
+    </g>
+  </g>
+  <rect x="0.5" y="0.5" width="599" height="247" rx="8" fill="none" stroke="#e5e5e5"/>
+</svg>
